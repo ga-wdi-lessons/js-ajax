@@ -30,8 +30,6 @@ Turn and talk to you neighbor, why might synchronous programming not be effectiv
 We don't want to sit around and wait for code to execute before we load the rest of our script. It would be really nice if we could just describe what we want to happen when the code finally does execute, in a callback.
 
 
-## `$.ajax`- JSON (10/25)
-
 ### What is an API?
 
 > Basically, an API is a service that provides raw data for public use.
@@ -40,7 +38,7 @@ API stands for "Application Program Interface" and technically applies to all of
 
 As we move into building single page applications, now is the perfect time to start understanding how to obtain data on the client side and then render it on the browser.
 
-### What is Serialized Data? (10 minutes / 0:20)
+### What is Serialized Data? 
 
 All data sent via HTTP are strings. Unfortunately, what we really want to pass between web applications is **structured data** (i.e., arrays and hashes). Thus, native data structures can be **serialized** into a string representation of the data. This string can be transmitted and then parsed back into data by another web agent.  
 
