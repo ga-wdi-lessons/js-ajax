@@ -32,6 +32,71 @@ We don't want to sit around and wait for code to execute before we load the rest
 
 ## `$.ajax`- JSON (10/25)
 
+### What is an API?
+
+> Basically, an API is a service that provides raw data for public use.
+
+API stands for "Application Program Interface" and technically applies to all of software design. The DOM and jQuery are actually examples of APIs! Since the explosion of information technology, however, the term now commonly refers to web URLs that can be accessed for raw data.
+
+As we move into building single page applications, now is the perfect time to start understanding how to obtain data on the client side and then render it on the browser.
+
+### What is Serialized Data? (10 minutes / 0:20)
+
+All data sent via HTTP are strings. Unfortunately, what we really want to pass between web applications is **structured data** (i.e., arrays and hashes). Thus, native data structures can be **serialized** into a string representation of the data. This string can be transmitted and then parsed back into data by another web agent.  
+
+There are **two** major serialized data formats...  
+
+#### JSON
+
+**JSON** stands for "JavaScript Object Notation" and has become a universal standard for serializing native data structures for transmission. It is light-weight, easy to read and quick to parse.
+
+```json
+{
+  "users": [
+    {"name": "Bob", "id": 23},
+    {"name": "Tim", "id": 72}
+  ]
+}
+```
+> Remember, JSON is a serialized format. While it may look like an object, it needs to be parsed so we can interact with it as a true Javascript object.
+
+#### XML
+
+**XML** stands for "eXtensible Markup Language" and is the granddaddy of serialized data formats (itself based on HTML). XML is fat, ugly and cumbersome to parse. It remains a major format, however, due to its legacy usage across the web. You'll probably always favor using a JSON API, if available.
+
+```
+<users>
+  <user id="23">
+    <name><![CDATA[Bob]]></name>
+  </user>
+  <user id="72">
+    <name><![CDATA[Tim]]></name>
+  </user>
+</users>
+```
+
+## Where Do We Find APIs? (5 mins)
+
+APIs are published everywhere. Chances are good that most major content sources you follow online publish their data in some type of serialized format. Heck, [even Marvel publishes an API](http://developer.marvel.com/documentation/getting_started). Look around for a "Developers" section on major websites.
+
+**That sounds hard. Can't you just give me a freebie?**
+
+Try the [Programmable Web API Directory](http://www.programmableweb.com/apis/directory) or the [Public APIs Directory](http://www.publicapis.com/).
+
+## What Is An API Key? (5 minutes / 0:25)
+
+While the majority of APIs are free to use, many of them require an API "key" that identifies the developer requesting data access. This is done to regulate usage and prevent abuse. Some APIs also rate-limit developers, meaning they have caps on the free data allowed during a given time period.
+
+**Try hitting the [Giphy](https://api.giphy.com/) API...**
+
+* No key: [http://api.giphy.com/v1/gifs/search?q=funny+cat](http://api.giphy.com/v1/gifs/search?q=funny+cat)
+
+* With key: [http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC](http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC)
+
+**It is very important that you not push your API keys to a public Github repo.**
+
+> This is especially true when working with [Amazon Web Services (AWS)](https://aws.amazon.com/). Here's an example of a [stolen key horror story](https://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight).
+
 For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). **Follow the link and sign up for a key.**
 
 Once you're ready, follow this link. Check out the example in the middle of the page. You'll see a URL   that looks something like: `http://api.wunderground.com/api/your_key/conditions/q/CA/San_Francisco.json`
@@ -318,8 +383,12 @@ $(".test_ajax_delete").on("click", function(){
 * Do everything we've done in class today for Songs.
 * Create an AJAX request in another app you've created (e.g., projects, Scribble). Be sure to make sure your controller actions respond to JSON.
 
-## Homework over Thanksgiving:
-You can find the homework over thanksgiving [here](https://github.com/ga-dc/thanksgiving-homework)
+## What does this have to do with angular?
+
+Angular developers often need to perform CRUD functionality to/from an API. This is the stuff that's happening under the hood when we're leveraging angular resources in our next angular class. You could imagine that writing all the setup for CRUD functionality through javascript could get a bit unwieldy. That's why front end frameworks like angular exist, they solve that problem.
+
+The things covered in this class won't be used again for the rest of this class. However, it is extremely important. Many employers will probably want you to know ajax and now you do. Another tool in your toolbelt, add it to that ever growing list we wrote in the beginning of class.
+
 
 ## Sample Quiz Questions
   1. Write an AJAX GET request to a known end point.  
