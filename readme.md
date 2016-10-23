@@ -10,10 +10,10 @@
 
 ## Framing
 
-In the first couple of weeks we learned how to style a semantically structured HTML site with the ability to manipulate the DOM. In the past couple weeks or so, we've been learning a lot about server-side requests and responses. Today we'll be tying these concepts together. Currently we know how to create applications with full CRUD on models in our database, and that's great. When we do that CRUD, however, it requires a page reload of some kind. It would be really nice if had some functionality on the client side of our application but still communicate with the backend without a page refresh. If only we had a client side language that was non blocking and asynchronous...
+In the first couple of weeks we learned how to style a semantically structured HTML site with the ability to manipulate the DOM. In the past couple weeks or so, we've been learning a lot about server-side requests and responses. Today we'll be tying these concepts together. Currently we know how to create applications with full CRUD on models in our database, and that's great. When we do that CRUD, however, it requires a page reload of some kind. It would be really nice if had some functionality on the client side of our application but still communicate with the backend without a page refresh. If only we had a client side language that was non-blocking and asynchronous...
 
 * **Whats the difference between synchronous and asynchronous program execution?**
-* **What kind of things can we do with non blocking asynchronous program execution?**
+* **What kind of things can we do with non-blocking asynchronous program execution?**
 
 ## Turn & Talk (10 minutes / 0:10)
 
@@ -39,6 +39,8 @@ In the first couple of weeks we learned how to style a semantically structured H
   <summary>Why might synchronous programming not be effective for the front end?</summary>
 
   > We don't want to sit around and wait for code to execute before we load the rest of our script. It would be really nice if we could just describe what we want to happen when the code finally does execute.
+  >
+  > [A demo.](http://codepen.io/amaseda/pen/gwqGgK)
 
 </details>
 
@@ -93,7 +95,7 @@ Try the [Programmable Web API Directory](http://www.programmableweb.com/apis/dir
 
 While the majority of APIs are free to use, many of them require an API "key" that identifies the developer requesting access. This is done to regulate usage and prevent abuse. Some APIs also rate-limit developers, meaning they have caps on the free data allowed during a given time period.
 
-Let's try hitting the [Giphy API](https://api.giphy.com/)...
+Let's try making a GET request to the [Giphy API](https://api.giphy.com/)...
 
 * Fist with no key: [http://api.giphy.com/v1/gifs/search?q=funny+cat](http://api.giphy.com/v1/gifs/search?q=funny+cat)
 * Then with a key: [http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC](http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC)
@@ -114,53 +116,31 @@ You should see a big JSON object. Lucky for us, we'll be able to navigate throug
 
 We can interact with APIs using a jQuery method called AJAX. With the help of AJAX ("Asynchronous Javascript and XML") we can send HTTP requests from the client asynchronously without having to reload the page.
 
-Let's try that out ourselves. First step: create some files...
+Let's try that out ourselves. Let's start by cloning down [this repo](https://github.com/ga-wdi-exercises/weather_underground_ajax)...
 
 ```bash
-$ mkdir wunderground_ajax
-$ cd wunderground_ajax
-$ touch index.html
-$ touch script.js
+$ git clone git@github.com:ga-wdi-exercises/weather_underground_ajax.git
 ```
 
-In `index.html`, let's link to the proper stylesheet and script files...
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
-<body>
-  <h1>hello</h1>
-  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
-```
-
-In `script.js`, use AJAX to send a `GET` request to the Weather Underground API...
+In `script.js`, we will use AJAX to send a `GET` request to the Weather Underground API...
 
 ```js
-$(document).ready(function(){
-  $("h1").on("click", function(){
-    var url = "https://api.wunderground.com/api/f28a93cae85945b6/geolookup/conditions/q/va/midlothian.json"
-    $.ajax({
-      url: url,
-      type: "get",
-      dataType: "json"
-      // $.ajax takes an object as an argument with at least three key-value pairs...
-      // (1) The URL endpoint for the JSON object.
-      // (2) Type of HTTP request.
-      // (3) Datatype. Usually JSON.
-    }).done(function(){
-      console.log("Ajax request success!")
-    }).fail(function(){
-      console.log("Ajax request fails!")
-    }).always(function(){
-      console.log("This always happens regardless of successful ajax request or not.")
-    })
+$("h1").on("click", function(){
+  var url = "https://api.wunderground.com/api/f28a93cae85945b6/geolookup/conditions/q/va/midlothian.json"
+  $.ajax({
+    url: url,
+    type: "get",
+    dataType: "json"
+    // $.ajax takes an object as an argument with at least three key-value pairs...
+    // (1) The URL endpoint for the JSON object.
+    // (2) Type of HTTP request.
+    // (3) Datatype. Usually JSON.
+  }).done(function(){
+    console.log("Ajax request success!")
+  }).fail(function(){
+    console.log("Ajax request fails!")
+  }).always(function(){
+    console.log("This always happens regardless of successful ajax request or not.")
   })
 })
 ```
@@ -208,7 +188,7 @@ Take our existing code for the the weather underground app. Instead of logging t
 
 So we've used AJAX to do an asynchronous `GET` request to an API. More often than not, 3rd party API's are read-only. They probably don't want just anyone to be able to update the weather however they want. That is not to say that kind of functionality doesn't exist, we just don't have access to it.
 
-It just so happens we've built a Tunr Rails API where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-dc/tunr_ajax).
+It just so happens we've built a Tunr Rails API where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-wdi-exercises/tunr_rails_ajax).
 
 Once you've cloned the repo, `cd` into it and run the usual commands...
 
@@ -216,8 +196,6 @@ Once you've cloned the repo, `cd` into it and run the usual commands...
 $ bundle install
 $ rails db:create db:migrate db:seed
 ```
-
-<!-- AM: Make sure ^ this API ^ is updated to Rails 5 -->
 
 We can now use `$.ajax()` to make asynchronous HTTP requests to our Tunr API! Let's go ahead and create a new Artists controller action and corresponding view: `test_ajax`
 
@@ -251,10 +229,8 @@ Create `app/views/artists/test_ajax.html.erb` and add the following...
 Let's add an event listener to the first link in `app/assets/javascripts/application.js`...
 
 ```javascript
-$(document).ready(function(){
-  $(".test_ajax_get").on("click", function(){
-    alert("clicked!");
-  })
+$(".test_ajax_get").on("click", function(){
+  alert("clicked!");
 })
 ```
 
@@ -263,17 +239,15 @@ $(document).ready(function(){
 Great, everything's working. Let's try doing a `GET` request to our API like we did with the Weather Underground. In `app/assets/javascripts/application.js`...
 
 ```javascript
-$(document).ready(function(){
-  $(".test_ajax_get").on("click", function(){
-    $.ajax({
-      type: 'GET',
-      dataType: 'json',
-      url: "http://localhost:3000/artists"
-    }).done(function(response) {
-      console.log(response);
-    }).fail(function(response){
-      console.log("Ajax get request failed.");
-    })
+$(".test_ajax_get").on("click", function(){
+  $.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url: "/artists"
+  }).done(function(response) {
+    console.log(response);
+  }).fail(function(response){
+    console.log("Ajax get request failed.");
   })
 })
 ```
@@ -327,7 +301,7 @@ $(".test_ajax_post").on("click", function(){
       }
     },
     dataType: 'json',
-    url: "http://localhost:3000/artists"
+    url: "/artists"
   }).done(function(response) {
     console.log(response);
   }).fail(function(response){
@@ -353,6 +327,14 @@ Use the form to dynamically generate artists from the client side.
 Once you create a new artist in the database, update the view so that it includes the new artist.
 
 > Hint: look at the response.
+
+<details>
+  <summary><strong>Solution...</strong></summary>
+
+  ```js
+  ```
+
+</details>
 
 <!-- AM: Add solutions to exercises -->
 
@@ -387,22 +369,25 @@ $(".test_ajax_put").on("click", function(){
 
 Make an event listener that deletes a record in our database using AJAX in `app/assets/javascripts/application.js`
 
-```javascript
-$(".test_ajax_delete").on("click", function(){
-  $.ajax({
-    type: 'DELETE',
-    dataType: 'json',
-    url: "http://localhost:3000/artists/9"
-  }).done(function(response){
-    console.log("DELETED");
-    console.log(response);
-  }).fail(function(){
-    console.log("Failed to delete.");
-  })
-})
-```
+<details>
+  <summary><strong>Solution...</strong></summary>
 
-<!-- AM: Hide solution -->
+  ```js
+  $(".test_ajax_delete").on("click", function(){
+    $.ajax({
+      type: 'DELETE',
+      dataType: 'json',
+      url: "/artists/9"
+    }).done(function(response){
+      console.log("DELETED");
+      console.log(response);
+    }).fail(function(){
+      console.log("Failed to delete.");
+    })
+  })
+  ```
+
+</details>
 
 #### Bonus
 
@@ -464,7 +449,7 @@ In order to do an AJAX `get` request to your own rails API:
 $.ajax({
   type: 'GET',
   dataType: 'json',
-  url: "http://localhost:3000/artists"
+  url: "/artists"
 }).done(function(response) {
   console.log(response);
 }).fail(function(response){
@@ -478,7 +463,7 @@ $.ajax({
   type: 'POST',
   data: {artist: {photo_url: "www.google.com", name: "bob", nationality: "bob"}},
   dataType: 'json',
-  url: "http://localhost:3000/artists"
+  url: "/artists"
 }).done(function(response) {
   console.log(response);
 }).fail(function(response){
@@ -513,7 +498,7 @@ In order to do an AJAX `delete` request to your own rails API:
 $.ajax({
   type: 'DELETE',
   dataType: 'json',
-  url: "http://localhost:3000/artists/9"
+  url: "/artists/9"
 }).done(function(response){
   console.log("DELETED");
   console.log(response);
