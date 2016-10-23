@@ -1,4 +1,4 @@
-# Ajax
+# AJAX and APIs
 
 ## Learning Objectives
 - Explain the difference between synchronous and asynchronous program execution
