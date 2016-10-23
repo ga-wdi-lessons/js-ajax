@@ -22,21 +22,21 @@ In the first couple of weeks we learned how to style a semantically structured H
 [Open up Google Maps in your browser](https://www.google.com/maps). As you interact with the web app, consider the following questions...
 
 <details>
-  <summary>What is happening asynchronously?</summary>
+  <summary><strong>What is happening asynchronously?</strong></summary>
 
   > Pretty much everything.
 
 </details>
 
 <details>
-  <summary>How would Google Maps work if everything happened synchronously?</summary>
+  <summary><strong>How would Google Maps work if everything happened synchronously?</strong></summary>
 
   > The page would need to re-load whenever the map is updated. Consider how http requests work within your rails application.
 
 </details>
 
 <details>
-  <summary>Why might synchronous programming not be effective for the front end?</summary>
+  <summary><strong>Why might synchronous programming not be effective for the front end?</strong></summary>
 
   > We don't want to sit around and wait for code to execute before we load the rest of our script. It would be really nice if we could just describe what we want to happen when the code finally does execute.
   >
