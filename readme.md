@@ -99,7 +99,7 @@ Let's try making a GET request to the [Giphy API](https://api.giphy.com/)...
 
 ## The Weather Underground API
 
-For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). Follow the link and sign up for a key.
+For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). Follow the link and [sign up](https://www.wunderground.com/member/registration?mode=api_signup) for a key.
 
 Once you've done that, visit the below link but make sure to replace `your_key` with your API key...
 
