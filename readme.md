@@ -1,10 +1,5 @@
 # Ajax
 
-## Screencasts
-- [ajax 1](https://youtu.be/K4zRqJm7sXU)
-- [ajax 2](https://youtu.be/WoA5LnPXWB8)
-- [ajax 3](https://youtu.be/3xUy5QmrBuc)
-
 ## Learning Objectives
 - Explain the difference between synchronous and asynchronous program execution
 - Explain why synchronous program execution is not conducive to the front-end.
@@ -13,36 +8,49 @@
 - Render new HTML content using data loaded from an Ajax request.
 - Perform POST, PUT, and DELETE requests to an API to modify data.
 
-## Opening Framing (5/5)
+## Framing
 
-### PKI -
-Let's list out some technologies we've learned in this class thus far.
+In the first couple of weeks we learned how to style a semantically structured HTML site with the ability to manipulate the DOM. In the past couple weeks or so, we've been learning a lot about server-side requests and responses. Today we'll be tying these concepts together. Currently we know how to create applications with full CRUD on models in our database, and that's great. When we do that CRUD, however, it requires a page reload of some kind. It would be really nice if had some functionality on the client side of our application but still communicate with the backend without a page refresh. If only we had a client side language that was non blocking and asynchronous...
 
-That is a tremendous amount of stuff. In the first couple of weeks we learned how to style a semantically structured HTML site with the ability to manipulate the DOM. In the past couple weeks or so, we've been learning a lot about server-side requests and responses. Today we'll be tying these concepts together. Currently we know how to create applications with full CRUD on models in our database, and that's great. When we do that CRUD, however, it requires a page reload of some kind. It would be really nice if had some functionality on the client side of our application but still communicate with the backend without a page refresh. If only we had a client side language that was non blocking and asynchronous...
+* **Whats the difference between synchronous and asynchronous program execution?**
+* **What kind of things can we do with non blocking asynchronous program execution?**
 
-(ST-WG) Think back to the first couple weeks of class, whats the difference between synchronous and asynchronous program execution? More importantly, what kind of things can we do with non blocking asynchronous program execution?
+## Turn & Talk (10 minutes / 0:10)
 
-### T & T (10/15)
-Let's look at Google Maps. How would this site work with things not happening asynchronously?
+> 5 minutes T&T. 5 minutes review.
 
-Turn and talk to you neighbor, why might synchronous programming not be effective for the front end? Consider how http requests work within your rails application.
+[Open up Google Maps in your browser](https://www.google.com/maps). As you interact with the web app, consider the following questions...
 
-We don't want to sit around and wait for code to execute before we load the rest of our script. It would be really nice if we could just describe what we want to happen when the code finally does execute, in a callback.
+<details>
+  <summary>What is happening asynchronously?</summary>
 
+  > Pretty much everything.
 
-### What is an API?
+</details>
 
-> Basically, an API is a service that provides raw data for public use.
+<details>
+  <summary>How would Google Maps work if everything happened synchronously?</summary>
 
-API stands for "Application Program Interface" and technically applies to all of software design. The DOM and jQuery are actually examples of APIs! Since the explosion of information technology, however, the term now commonly refers to web URLs that can be accessed for raw data.
+  > The page would need to re-load whenever the map is updated. Consider how http requests work within your rails application.
+
+</details>
+
+<details>
+  <summary>Why might synchronous programming not be effective for the front end?</summary>
+
+  > We don't want to sit around and wait for code to execute before we load the rest of our script. It would be really nice if we could just describe what we want to happen when the code finally does execute.
+
+</details>
+
+### What Is An API?
+
+API stands for "Application Program Interface" and technically applies to all of software design. The DOM and jQuery are actually examples of APIs. Since the explosion of information technology, however, the term now commonly refers to web URLs that can be accessed for raw data.
 
 As we move into building single page applications, now is the perfect time to start understanding how to obtain data on the client side and then render it on the browser.
 
-### What is Serialized Data? 
+> **tl;dr** - an API is a service that provides raw data for public use.
 
-All data sent via HTTP are strings. Unfortunately, what we really want to pass between web applications is **structured data** (i.e., arrays and hashes). Thus, native data structures can be **serialized** into a string representation of the data. This string can be transmitted and then parsed back into data by another web agent.  
-
-There are **two** major serialized data formats...  
+### API Data Formats (5 minutes / 0:15)
 
 #### JSON
 
@@ -56,7 +64,7 @@ There are **two** major serialized data formats...
   ]
 }
 ```
-> Remember, JSON is a serialized format. While it may look like an object, it needs to be parsed so we can interact with it as a true Javascript object.
+> JSON is a serialized format, meaning it is made up of strings. While it may look like an object, it needs to be parsed so we can interact with it as a true Javascript object.
 
 #### XML
 
@@ -73,7 +81,7 @@ There are **two** major serialized data formats...
 </users>
 ```
 
-## Where Do We Find APIs? (5 mins)
+## Where Do We Find APIs?
 
 APIs are published everywhere. Chances are good that most major content sources you follow online publish their data in some type of serialized format. Heck, [even Marvel publishes an API](http://developer.marvel.com/documentation/getting_started). Look around for a "Developers" section on major websites.
 
@@ -81,37 +89,32 @@ APIs are published everywhere. Chances are good that most major content sources 
 
 Try the [Programmable Web API Directory](http://www.programmableweb.com/apis/directory) or the [Public APIs Directory](http://www.publicapis.com/).
 
-## What Is An API Key? (5 minutes / 0:25)
+## What Is An API Key? (5 minutes / 0:20)
 
-While the majority of APIs are free to use, many of them require an API "key" that identifies the developer requesting data access. This is done to regulate usage and prevent abuse. Some APIs also rate-limit developers, meaning they have caps on the free data allowed during a given time period.
+While the majority of APIs are free to use, many of them require an API "key" that identifies the developer requesting access. This is done to regulate usage and prevent abuse. Some APIs also rate-limit developers, meaning they have caps on the free data allowed during a given time period.
 
-**Try hitting the [Giphy](https://api.giphy.com/) API...**
+Let's try hitting the [Giphy API](https://api.giphy.com/)...
 
-* No key: [http://api.giphy.com/v1/gifs/search?q=funny+cat](http://api.giphy.com/v1/gifs/search?q=funny+cat)
+* Fist with no key: [http://api.giphy.com/v1/gifs/search?q=funny+cat](http://api.giphy.com/v1/gifs/search?q=funny+cat)
+* Then with a key: [http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC](http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC)
 
-* With key: [http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC](http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC)
+> **It is very important that you not push your API keys to a public Github repo.** This is especially true when working with [Amazon Web Services (AWS)](https://aws.amazon.com/). Here's an example of a [stolen key horror story](https://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight).
 
-**It is very important that you not push your API keys to a public Github repo.**
+## The Weather Underground API
 
-> This is especially true when working with [Amazon Web Services (AWS)](https://aws.amazon.com/). Here's an example of a [stolen key horror story](https://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight).
+For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). Follow the link and sign up for a key.
 
-For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). **Follow the link and sign up for a key.**
+Once you've done that, visit the below link but make sure to replace `your_key` with your API key...
 
-Once you're ready, follow this link. Check out the example in the middle of the page. You'll see a URL   that looks something like: `http://api.wunderground.com/api/your_key/conditions/q/CA/San_Francisco.json`
-> Replace `your_key` with your actual key and visit that URL.
-> If you're using the key provided in the lesson plan, we only have a rate limit of 500 so please don't over use!
+`http://api.wunderground.com/api/your_key/conditions/q/CA/San_Francisco.json`
 
-You should see a really gigantic object/hash. It can be really intimidating at first. But let's just start clicking around till we find some information we might want to display.
+You should see a big JSON object. Lucky for us, we'll be able to navigate through it using Javascript.
 
-Turns out, we can actually access this JSON object using Javascript!
-> JSON stands for Javascript Object Notation. JSON can come in a bunch of different ways. But at the end of the day, it's just an object/hash.
+## `$.ajax` (25 minutes / 0:45)
 
-## `$.ajax` (25/50)
-The jQuery library gives us access to this awesome thing called "Asynchronous Javascript and XML" (AJAX). With the help of AJAX we can do server side requests asynchronously on the client without having to send an actual browser request that reloads the page.
+We can interact with APIs using a jQuery method called AJAX. With the help of AJAX ("Asynchronous Javascript and XML") we can send HTTP requests from the client asynchronously without having to reload the page.
 
-With AJAX we can make the usual HTTP requests: 'GET' 'POST' 'PUT' 'PATCH' 'DELETE'. Let's give that a shot.  
-
-The first thing we'll do is create the files we need for this application...  
+Let's try that out ourselves. First step: create some files...
 
 ```bash
 $ mkdir wunderground_ajax
@@ -120,7 +123,7 @@ $ touch index.html
 $ touch script.js
 ```
 
-Let's give `index.html` a `<head>` that links to both jQuery and our script file...  
+In `index.html`, let's link to the proper stylesheet and script files...
 
 ```html
 <!DOCTYPE html>
@@ -136,9 +139,8 @@ Let's give `index.html` a `<head>` that links to both jQuery and our script file
 </body>
 </html>
 ```
-> AJAX is given to us through the jQuery library.
 
-Let's go ahead and make our first AJAX `GET` request in our `script.js`...
+In `script.js`, use AJAX to send a `GET` request to the Weather Underground API...
 
 ```js
 $(document).ready(function(){
@@ -162,68 +164,80 @@ $(document).ready(function(){
   })
 })
 ```
-> This is kind of similar to when we used HTTParty synchronously on the back-end!
 
-> You'll notice there are 3 functions that are tacked onto the AJAX call. These are known as promises. Promises are just callbacks that may or may not happen. A promise represents the future result of an asynchronous operation. In the `.done()` promise if that ajax is executed successfully, the block of code inside it will execute. In the `.fail()` promise, if that ajax is not executed successfully, the block of code inside it will execute. In the `.always()` promise, code block inside will always occur regardless of the ajax's success.
+> AJAX is given to us through the jQuery library. Like all jQuery methods, [it is just running vanilla Javascript under the good](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest).
+
+You'll notice there are 3 functions chained onto the AJAX call. These are known as **promises**. Promises are callbacks that may or may not happen. A promise represents the future result of an asynchronous operation.
+
+* `.done()` - this code is run if the AJAX call is successful
+* `.fail()` - this code is run if the AJAX call is not successful
+* `.always()` - this code is always run, regardless of whether the AJAX call is successful or not
 
 But how do we go about accessing that big JSON object we saw before? By passing in an argument to the anonymous function callback. The `$.ajax` call returns a response that you can then pass in as an argument to the promise.
 
 ```js
-// `response` contains the actual response from the ajax call.
 .done(function(response)(){
   console.log(response)
 })
 ```
 
-We can drill through this response just like any other JS object.
+> `response` contains the information received from the AJAX call.
+
+We can drill through this response just like any other JS object...
 
 ```js
-// Note that we use traditional Javascript object notation to access the response.
 .done(function(response)(){
   console.log(response.current_observation.temp_f)
 })
 ```
 
-## YOU DO: DOM Manipulation Using Response Data (10/60)
+> Note that we use traditional Javascript object notation to access the response.
 
-Take our existing code for the the weather underground app. Instead of logging the temperature, the `.done()` promise should create a div with the current wind speed in mph.  
+## You Do: DOM Manipulation Using Response Data (10 minutes / 0:55)
 
-### Bonus
-  1. Create an input text field for City and State in the HTML.  
-  2. Have the endpoint url change dynamically based on user input to generate a div about current weather in that area.  
+Take our existing code for the the weather underground app. Instead of logging the temperature, the `.done()` promise should add a div to the page that contains the current wind speed in MPH.  
 
-## Break (10/70)
+#### Bonus
 
-## Intro: AJAX and CRUD (5/75)
-So we've used AJAX to do an asynchronous `GET` request to a 3rd party API. More often than not, 3rd party API's are usually read only. They probably don't want just anyone to be able to update the weather however they want. That is not to say that kind of functionality doesn't exist, we just don't have access to it.
+1. Create an input text field for City and State in the HTML.  
+2. Have the endpoint url change dynamically based on user input to generate a div about current weather in that area.  
 
-It just so happens we've built a new Rails API where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-dc/tunr_ajax).
+## Break (10 minutes / 1:05)
+
+## Intro: AJAX and CRUD (5 minutes / 1:10)
+
+So we've used AJAX to do an asynchronous `GET` request to an API. More often than not, 3rd party API's are read-only. They probably don't want just anyone to be able to update the weather however they want. That is not to say that kind of functionality doesn't exist, we just don't have access to it.
+
+It just so happens we've built a Tunr Rails API where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-dc/tunr_ajax).
 
 Once you've cloned the repo, `cd` into it and run the usual commands...
 
 ```bash
 $ bundle install
-$ rake db:create db:migrate db:seed
+$ rails db:create db:migrate db:seed
 ```
 
-We can now use `$.ajax()` to make asynchronous HTTP requests to our Tunr app! Let's go ahead and create a new Artists controller action and corresponding view: `test_ajax`
+<!-- AM: Make sure ^ this API ^ is updated to Rails 5 -->
 
-## Setting up a view to test AJAX with (10/85)
-Let's update our routes in `config/routes.rb` for a new route to test all of our AJAX calls in:
+We can now use `$.ajax()` to make asynchronous HTTP requests to our Tunr API! Let's go ahead and create a new Artists controller action and corresponding view: `test_ajax`
+
+## Set up an AJAX Test View (10 minutes / 1:20)
+
+Let's update our routes in `config/routes.rb` for a new route to test all of our AJAX calls in...
 
 ```ruby
 get '/test_ajax', to: 'artists#test_ajax'
 ```
 
-in `app/controllers/artists_controller.rb`:
+In `app/controllers/artists_controller.rb`...
 
 ```ruby
-# We're just creating this so we can test AJAX on a separate view, test_ajax.html.erb.
 def test_ajax
 end
 ```
+> This controller action will be triggered when somebody visits our new route
 
-Create `app/views/artists/test_ajax.html.erb` and place the following content:
+Create `app/views/artists/test_ajax.html.erb` and add the following...
 
 ```html
 <div class="test_ajax_get">AJAX GET!</div>
@@ -232,7 +246,9 @@ Create `app/views/artists/test_ajax.html.erb` and place the following content:
 <div class="test_ajax_delete">AJAX DELETE!</div>
 ```
 
-We're just going to add a quick event listener to this div inside `app/assets/javascripts/application.js`:
+<!-- AM: Add some styling so that ^ these ^ look like buttons... -->
+
+Let's add an event listener to the first link in `app/assets/javascripts/application.js`...
 
 ```javascript
 $(document).ready(function(){
@@ -242,8 +258,9 @@ $(document).ready(function(){
 })
 ```
 
-## AJAX GET (5/90)
-Great, everything's working. Let's try doing a `GET` request to our API like we did with the Weather underground API. In `app/assets/javascripts/application.js`:
+## AJAX GET (5 minutes / 1:25)
+
+Great, everything's working. Let's try doing a `GET` request to our API like we did with the Weather Underground. In `app/assets/javascripts/application.js`...
 
 ```javascript
 $(document).ready(function(){
@@ -263,14 +280,13 @@ $(document).ready(function(){
 
 > If we access the response object, we can see all of the artists that were seeded in the database. Inside the done promise, we can interact with and display all the contents of the response.
 
-## Setup for AJAX POST (10/100)
-Lets update our view to include some input fields and all of our existing artists in `app/views/artists/test_ajax.html.erb`:
+## Setup for AJAX POST (10 minutes / 1:35)
+
+Lets update our view to include some input fields and all of our existing artists in `app/views/artists/test_ajax.html.erb`...
 
 ```html
-<!-- div attached to event handler -->
 <div class="test_ajax_get">AJAX GET!</div>
 
-<!-- form for ajax post and put request -->
 <label>Name:</label>
 <input class="name" type="text">
 <label>Photo_url:</label>
@@ -278,7 +294,6 @@ Lets update our view to include some input fields and all of our existing artist
 <label>Nationality:</label>
 <input class="nationality" type="text">
 
-<!-- divs attached to event handlers -->
 <div class="test_ajax_post">AJAX POST!!</div>
 <div class="test_ajax_put">AJAX PUT!!</div>
 <div class="test_ajax_delete">AJAX DELETE!!</div>
@@ -293,42 +308,57 @@ Lets update our view to include some input fields and all of our existing artist
     </li>
   <% end %>
 </ul>
-
 ```
 > Now we're listing all the artists in this view. We've also included an HTML form we'll use soon to generate new artists.
 
-## AJAX Post (10/110)
-Let's try and create an artist using AJAX. Let's update our `app/assets/javascripts/application.js`...
+## AJAX Post (10 minutes / 1:45)
+
+Let's create an artist using AJAX. In `app/assets/javascripts/application.js`...
 
 ```javascript
 $(".test_ajax_post").on("click", function(){
   $.ajax({
     type: 'POST',
-    data: {artist: {photo_url: "www.google.com", name: "bob", nationality: "bob"}},
+    data: {
+      artist: {
+        name: "Limp Bizkit",
+        nationality: "USA"
+        photo_url: "http://nerdist.com/wp-content/uploads/2014/12/limp_bizkit-970x545.jpg",
+      }
+    },
     dataType: 'json',
     url: "http://localhost:3000/artists"
   }).done(function(response) {
     console.log(response);
   }).fail(function(response){
-    console.log("Ajax get request failed");
+    console.log("AJAX POST failed");
   })
 })
 ```
 
-As you can see, every time we click on this button another artist is generated. This is awesome! We can now create things in our database on the client side. But there's a problem here: we've hardcoded the attributes.
+Every time we click on this button another artist is generated. We can now create things in our database from the client-side. But there's a problem here: we've hardcoded the attributes.
 
-**Question for you:** how might we be able to dynamically acquire data on the client side instead of hardcoding values?
+* **How might we be able to dynamically acquire data on the client side instead of hardcoding values?**
 
-## BREAK
+## Break (10 minutes / 1:55)
 
-## YOU DO: Work in Pairs (20/130)
+## You Do: Dynamically Create Artists (15 minutes / 2:10)
+
+> 10 minutes exercise. 5 minutes review.
 
 Use the form to dynamically generate artists from the client side.
-* **BONUS**: Once you create a new artist in the database, asynchronously update the view so that it includes the new artist. (Hint: look at the response)
 
-## AJAX PUT (10/140) - We do
+#### Bonus
 
-Let's now update an existing artist by adding another AJAX call to our next event listener:
+Once you create a new artist in the database, update the view so that it includes the new artist.
+
+> Hint: look at the response.
+
+<!-- AM: Add solutions to exercises -->
+
+## We Do: AJAX PUT (10 minutes / 2:20)
+
+Let's update an existing artist by adding an AJAX call to the next event listener...
 
 ```javascript
 $(".test_ajax_put").on("click", function(){
@@ -351,11 +381,11 @@ $(".test_ajax_put").on("click", function(){
 })
 ```
 
-> NOTE: This is just to show you how put requests work. Normally we would not hardcode the URL. We'll get more into this during OOJS/Front-end Frameworks. But think about how we could modify the DOM in order to effectively use AJAX PUT requests.
+> NOTE: This is just to show you how put requests work. Normally we wouldn't hardcode the URL. But think about how we could modify the DOM in order to effectively use AJAX PUT requests.
 
-## AJAX DELETE (10/150) - You do
+## You Do: AJAX DELETE (10 minutes / 1:30)
 
-Let's update our Javascript for our final event listener to delete a record in our database through AJAX in `app/assets/javascripts/application.js`...
+Make an event listener that deletes a record in our database using AJAX in `app/assets/javascripts/application.js`
 
 ```javascript
 $(".test_ajax_delete").on("click", function(){
@@ -372,30 +402,42 @@ $(".test_ajax_delete").on("click", function(){
 })
 ```
 
-### Bonus Exercises for PUT and DELETE
-  1. Create a button or link that, when clicked, creates inline editing for an artist.
-  2. Create a button that submits an AJAX `PUT` request to update that artist in the database. Change the view on the client side, if need be.
-  3. Create a button or link for each artist that submits an AJAX `DELETE` request to delete an artist in the database. Update the view in the client side accordingly.
+<!-- AM: Hide solution -->
 
-## YOU DO (On Your Own Time): Practice Makes Perfect
+#### Bonus
+
+Each artist should have a button or link that, when clicked...
+
+* Allows for inline editing of the artist.
+* Submits an AJAX `PUT` request using the information in the input fields creating in the previous bonus prompt. Update the view with the new artist information.
+* Have a button or link that, when clicked, submits an AJAX `DELETE` request to delete that artist from the database. Remove the delete artist from the view.
+
+## Closing / Questions
+
+Angular developers often need to perform CRUD functionality to/from an API. This is the stuff that's happening under the hood when we're leveraging Angular Resources, which you will learn about tomorrow. You could imagine that writing all the setup for CRUD functionality through javascript could get a bit unwieldy. That's why front end frameworks like Angular exist, they solve that problem.
+
+## Sample Quiz Questions
+
+* Write an AJAX GET request to a known end point.  
+* How does a promise differ from a callback?  
+* Write an AJAX POST to create an object in a rails application.  
+
+------
+
+## Screencasts
+* [Part 1](https://youtu.be/K4zRqJm7sXU)
+* [Part 2](https://youtu.be/WoA5LnPXWB8)
+* [Part 3](https://youtu.be/3xUy5QmrBuc)
+
+## Practice
+
 * Do everything we've done in class today for Songs.
 * Create an AJAX request in another app you've created (e.g., projects, Scribble). Be sure to make sure your controller actions respond to JSON.
 
-## What does this have to do with angular?
-
-Angular developers often need to perform CRUD functionality to/from an API. This is the stuff that's happening under the hood when we're leveraging angular resources in our next angular class. You could imagine that writing all the setup for CRUD functionality through javascript could get a bit unwieldy. That's why front end frameworks like angular exist, they solve that problem.
-
-The things covered in this class won't be used again for the rest of this class. However, it is extremely important. Many employers will probably want you to know ajax and now you do. Another tool in your toolbelt, add it to that ever growing list we wrote in the beginning of class.
-
-
-## Sample Quiz Questions
-  1. Write an AJAX GET request to a known end point.  
-  2. How does a promise differ from a callback?  
-  3. Write an AJAX POST to create an object in a rails application.  
 
 ## Cliff Notes
 
-In order to do an AJAX `get` request to a 3rd party API:
+In order to do an AJAX `get` request to a 3rd party API...
 
 ```javascript
 $.ajax({
