@@ -92,7 +92,7 @@ While the majority of APIs are free to use, many of them require an API "key" th
 
 Let's try making a GET request to the [Giphy API](https://api.giphy.com/)...
 
-* Fist with no key: [http://api.giphy.com/v1/gifs/search?q=funny+cat](http://api.giphy.com/v1/gifs/search?q=funny+cat)
+* First with no key: [http://api.giphy.com/v1/gifs/search?q=funny+cat](http://api.giphy.com/v1/gifs/search?q=funny+cat)
 * Then with a key: [http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC](http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC)
 
 > In order to format JSON in the browser nicely, you might need a plugin like Chrome's [JSON View](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en).
