@@ -159,7 +159,7 @@ You'll notice there are 3 functions chained onto the AJAX call. These are known 
 But how do we go about accessing that big JSON object we saw before? By passing in an argument to the anonymous function callback. The `$.ajax` call returns a response that you can then pass in as an argument to the promise.
 
 ```js
-.done((response) => (){
+.done((response) => {
   console.log(response)
 })
 ```
@@ -169,7 +169,7 @@ But how do we go about accessing that big JSON object we saw before? By passing 
 We can drill through this response just like any other JS object...
 
 ```js
-.done((response) => (){
+.done((response) => {
   console.log(response.current_observation.temp_f)
 })
 ```
