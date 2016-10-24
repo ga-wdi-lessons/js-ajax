@@ -148,7 +148,7 @@ $("button").on("click", () => {
 })
 ```
 
-> AJAX is given to us through the jQuery library. Like all jQuery methods, [it is just running vanilla Javascript under the good](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest).
+> AJAX is given to us through the jQuery library. Like all jQuery methods, [it is just running vanilla Javascript under the hood](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest).
 
 You'll notice there are 3 functions chained onto the AJAX call. These are known as **promises**. Promises are callbacks that may or may not happen. A promise represents the future result of an asynchronous operation.
 
