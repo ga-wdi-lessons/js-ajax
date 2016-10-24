@@ -189,7 +189,11 @@ Take our existing code for the the weather underground app. Instead of logging t
 
 So we've used AJAX to do an asynchronous `GET` request to an API. More often than not, 3rd party API's are read-only. They probably don't want just anyone to be able to update the weather however they want. That is not to say that kind of functionality doesn't exist, we just don't have access to it.
 
-It just so happens we've built a Tunr Rails API where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-wdi-exercises/tunr_rails_ajax).
+It just so happens we've built a Tunr Rails API where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-wdi-exercises/tunr_rails_ajax)...
+
+```bash
+$ git clone git@github.com:ga-wdi-exercises/tunr_rails_ajax.git
+```
 
 Once you've cloned the repo, `cd` into it and run the usual commands...
 
@@ -219,10 +223,10 @@ end
 Create `app/views/artists/test_ajax.html.erb` and add the following...
 
 ```html
-<div class="test_ajax_get">AJAX GET!</div>
-<div class="test_ajax_post">AJAX POST!</div>
-<div class="test_ajax_put">AJAX PUT!</div>
-<div class="test_ajax_delete">AJAX DELETE!</div>
+<div class="get">AJAX GET!</div>
+<div class="post">AJAX POST!</div>
+<div class="put">AJAX PUT!</div>
+<div class="delete">AJAX DELETE!</div>
 ```
 
 <!-- AM: Add some styling so that ^ these ^ look like buttons... -->
@@ -230,8 +234,8 @@ Create `app/views/artists/test_ajax.html.erb` and add the following...
 Let's add an event listener to the first link in `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".test_ajax_get").on("click", function(){
-  alert("clicked!");
+$(".get").on("click", function(){
+  console.log("clicked!");
 })
 ```
 
@@ -240,7 +244,7 @@ $(".test_ajax_get").on("click", function(){
 Great, everything's working. Let's try doing a `GET` request to our API like we did with the Weather Underground. In `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".test_ajax_get").on("click", function(){
+$(".get").on("click", function(){
   $.ajax({
     type: 'GET',
     dataType: 'json',
@@ -399,7 +403,7 @@ Update an existing artist by adding an AJAX call to the next event listener. Don
 
 Make an event listener that deletes a record in our database using AJAX in `app/assets/javascripts/application.js`. Again, just hardcode the artist information into your Javascript.
 
-> [Resource: AJAX documentation](http://api.jquery.com/jquery.ajax/)
+> [Resource: AJAX Documentation](http://api.jquery.com/jquery.ajax/)
 
 <details>
   <summary><strong>Solution...</strong></summary>
