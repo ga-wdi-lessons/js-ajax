@@ -99,7 +99,12 @@ Let's try making a GET request to the [Giphy API](https://api.giphy.com/)...
 
 ## The Weather Underground API
 
-For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). Follow the link and [sign up](https://www.wunderground.com/member/registration?mode=api_signup) for a key.
+For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). Follow the link and [sign up](https://www.wunderground.com/member/registration?mode=api_signup) for a key. You'll need to take the following steps...
+* Sign up for a Weather Underground account
+* From the main API page, select "Explore My Options"
+* Click on "Purchase Key" - don't worry, it's free
+* Fill out the resulting form
+
 
 Once you've done that, visit the below link but make sure to replace `your_key` with your API key...
 
@@ -120,8 +125,9 @@ $ git clone git@github.com:ga-wdi-exercises/weather_underground_ajax.git
 In `script.js`, we will use AJAX to send a `GET` request to the Weather Underground API...
 
 ```js
-$("h1").on("click", function(){
-  var url = "https://api.wunderground.com/api/f28a93cae85945b6/geolookup/conditions/q/va/midlothian.json"
+$("button").on("click", function(){
+  // Make sure to add your API key to the URL!
+  var url = "https://api.wunderground.com/api/your_key/geolookup/conditions/q/va/midlothian.json"
   $.ajax({
     url: url,
     type: "get",
