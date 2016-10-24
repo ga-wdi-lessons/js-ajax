@@ -260,18 +260,10 @@ $(".test_ajax_get").on("click", function(){
 Lets update our view to include some input fields and all of our existing artists in `app/views/artists/test_ajax.html.erb`...
 
 ```html
-<div class="test_ajax_get">AJAX GET!</div>
-
-<label>Name:</label>
-<input class="name" type="text">
-<label>Photo_url:</label>
-<input class="photo_url" type="text">
-<label>Nationality:</label>
-<input class="nationality" type="text">
-
-<div class="test_ajax_post">AJAX POST!!</div>
-<div class="test_ajax_put">AJAX PUT!!</div>
-<div class="test_ajax_delete">AJAX DELETE!!</div>
+<div class="get">AJAX GET!</div>
+<div class="post">AJAX POST!!</div>
+<div class="put">AJAX PUT!!</div>
+<div class="delete">AJAX DELETE!!</div>
 
 <h1>Artists</h1>
 <ul class="artists">
@@ -291,7 +283,7 @@ Lets update our view to include some input fields and all of our existing artist
 Let's create an artist using AJAX. In `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".test_ajax_post").on("click", function(){
+$(".post").on("click", function(){
   $.ajax({
     type: 'POST',
     data: {
@@ -323,58 +315,97 @@ Every time we click on this button another artist is generated. We can now creat
 
 Use the form to dynamically generate artists from the client side.
 
+<details>
+  <summary><strong>Solution...</strong></summary>
+
+  ```html
+  <label>Name:</label>
+  <input class="name" type="text">
+  <label>Photo_url:</label>
+  <input class="photo_url" type="text">
+  <label>Nationality:</label>
+  <input class="nationality" type="text">
+  ```
+
+  ```js
+  $(".post").on("click", function(){
+
+    let name = $(".name").val()
+    let photo_url = $(".photo_url").val()
+    let nationality = $(".nationality").val()
+
+    $.ajax({
+      type: 'POST',
+      data: {
+        artist: {
+          name: name,
+          nationality: nationality,
+          photo_url: photo_url
+        }
+      },
+      dataType: 'json',
+      url: "/artists"
+    }).done(function(response){
+      console.log(response);
+    }).fail(function(){
+      console.log("Failed to create.");
+    })
+  })
+  ```
+
+</details>
+
 #### Bonus
 
 Once you create a new artist in the database, update the view so that it includes the new artist.
 
 > Hint: look at the response.
 
+## You Do: AJAX PUT (10 minutes / 2:20)
+
+Update an existing artist by adding an AJAX call to the next event listener. Don't worry about doing this dynamically - just hardcode artist values into your Javascript for now.
+
+> Updating with AJAX is very similar to creating. The difference is what type of HTTP request you are making and where you are directing it. [Feel free to reference the documentation if you need help](http://api.jquery.com/jquery.ajax/).
+
 <details>
   <summary><strong>Solution...</strong></summary>
 
-  ```js
+  ```javascript
+  $(".put").on("click", function(){
+    $.ajax({
+      type: 'PUT',
+      data: {
+        artist: {
+          name: "Robert Goulet",
+          nationality: "American",
+          photo_url: "http://media.giphy.com/media/u5yMOKjUpASwU/giphy.gif"
+        }
+      },
+      dataType: 'json',
+      url: "/artists/6"
+    }).done(function(response){
+      console.log(response);
+    }).fail(function(){
+      console.log("Failed to update.");
+    })
+  })
   ```
+
+  > NOTE: This is just to show you how put requests work. Normally we wouldn't hardcode the URL. But think about how we could modify the DOM in order to effectively use AJAX PUT requests.
 
 </details>
 
-<!-- AM: Add solutions to exercises -->
-
-## We Do: AJAX PUT (10 minutes / 2:20)
-
-Let's update an existing artist by adding an AJAX call to the next event listener...
-
-```javascript
-$(".test_ajax_put").on("click", function(){
-  $.ajax({
-    type: 'PUT',
-    data: {
-      artist: {
-        name: "Robert Goulet",
-        nationality: "American",
-        photo_url: "http://media.giphy.com/media/u5yMOKjUpASwU/giphy.gif"
-      }
-    },
-    dataType: 'json',
-    url: "/artists/6"
-  }).done(function(response){
-    console.log(response);
-  }).fail(function(){
-    console.log("Failed to update.");
-  })
-})
-```
-
-> NOTE: This is just to show you how put requests work. Normally we wouldn't hardcode the URL. But think about how we could modify the DOM in order to effectively use AJAX PUT requests.
-
 ## You Do: AJAX DELETE (10 minutes / 1:30)
 
-Make an event listener that deletes a record in our database using AJAX in `app/assets/javascripts/application.js`
+Make an event listener that deletes a record in our database using AJAX in `app/assets/javascripts/application.js`. Again, just hardcode the artist information into your Javascript.
+
+> [Resource: AJAX documentation](http://api.jquery.com/jquery.ajax/)
 
 <details>
   <summary><strong>Solution...</strong></summary>
 
   ```js
-  $(".test_ajax_delete").on("click", function(){
+  $(".delete").on("click", function(){
     $.ajax({
       type: 'DELETE',
       dataType: 'json',
@@ -444,7 +475,7 @@ $.ajax({
 })
 ```
 
-In order to do an AJAX `get` request to your own rails API:
+In order to do an AJAX `get` request to your own rails API...
 
 ```javascript
 $.ajax({
@@ -458,7 +489,7 @@ $.ajax({
 })
 ```
 
-In order to do an AJAX `post` request to your own rails API:
+In order to do an AJAX `post` request to your own rails API...
 ```javascript
 $.ajax({
   type: 'POST',
@@ -472,7 +503,7 @@ $.ajax({
 })
 ```
 
-In order to do an AJAX `put` request to your own rails API:
+In order to do an AJAX `put` request to your own rails API...
 
 ```javascript
 $.ajax({
