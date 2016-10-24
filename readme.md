@@ -127,7 +127,7 @@ $ git clone git@github.com:ga-wdi-exercises/weather_underground_ajax.git
 In `script.js`, we will use AJAX to send a `GET` request to the Weather Underground API...
 
 ```js
-$("button").on("click", function(){
+$("button").on("click", () => {
   // Make sure to add your API key to the URL!
   var url = "https://api.wunderground.com/api/your_key/geolookup/conditions/q/va/midlothian.json"
   $.ajax({
@@ -138,11 +138,11 @@ $("button").on("click", function(){
     // (1) The URL endpoint for the JSON object.
     // (2) Type of HTTP request.
     // (3) Datatype. Usually JSON.
-  }).done(function(){
+  }).done(() => {
     console.log("Ajax request success!")
-  }).fail(function(){
+  }).fail(() => {
     console.log("Ajax request fails!")
-  }).always(function(){
+  }).always(() => {
     console.log("This always happens regardless of successful ajax request or not.")
   })
 })
@@ -159,7 +159,7 @@ You'll notice there are 3 functions chained onto the AJAX call. These are known 
 But how do we go about accessing that big JSON object we saw before? By passing in an argument to the anonymous function callback. The `$.ajax` call returns a response that you can then pass in as an argument to the promise.
 
 ```js
-.done(function(response)(){
+.done((response) => (){
   console.log(response)
 })
 ```
@@ -169,7 +169,7 @@ But how do we go about accessing that big JSON object we saw before? By passing 
 We can drill through this response just like any other JS object...
 
 ```js
-.done(function(response)(){
+.done((response) => (){
   console.log(response.current_observation.temp_f)
 })
 ```
@@ -236,7 +236,7 @@ Create `app/views/artists/test_ajax.html.erb` and add the following...
 Let's add an event listener to the first link in `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".get").on("click", function(){
+$(".get").on("click", () => {
   console.log("clicked!");
 })
 ```
@@ -246,14 +246,14 @@ $(".get").on("click", function(){
 Great, everything's working. Let's try doing a `GET` request to our API like we did with the Weather Underground. In `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".get").on("click", function(){
+$(".get").on("click", () => {
   $.ajax({
     type: 'GET',
     dataType: 'json',
     url: "/artists"
-  }).done(function(response) {
+  }).done((response) =>  {
     console.log(response);
-  }).fail(function(response){
+  }).fail((response) => {
     console.log("Ajax get request failed.");
   })
 })
@@ -289,7 +289,7 @@ Lets update our view to include some input fields and all of our existing artist
 Let's create an artist using AJAX. In `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".post").on("click", function(){
+$(".post").on("click", () => {
   $.ajax({
     type: 'POST',
     data: {
@@ -301,9 +301,9 @@ $(".post").on("click", function(){
     },
     dataType: 'json',
     url: "/artists"
-  }).done(function(response) {
+  }).done((response) =>  {
     console.log(response);
-  }).fail(function(response){
+  }).fail((response) => {
     console.log("AJAX POST failed");
   })
 })
@@ -334,7 +334,7 @@ Use the form to dynamically generate artists from the client side.
   ```
 
   ```js
-  $(".post").on("click", function(){
+  $(".post").on("click", () => {
 
     let name = $(".name").val()
     let photo_url = $(".photo_url").val()
@@ -351,9 +351,9 @@ Use the form to dynamically generate artists from the client side.
       },
       dataType: 'json',
       url: "/artists"
-    }).done(function(response){
+    }).done((response) => {
       console.log(response);
-    }).fail(function(){
+    }).fail(() => {
       console.log("Failed to create.");
     })
   })
@@ -377,7 +377,7 @@ Update an existing artist by adding an AJAX call to the next event listener. Don
   <summary><strong>Solution...</strong></summary>
 
   ```javascript
-  $(".put").on("click", function(){
+  $(".put").on("click", () => {
     $.ajax({
       type: 'PUT',
       data: {
@@ -389,9 +389,9 @@ Update an existing artist by adding an AJAX call to the next event listener. Don
       },
       dataType: 'json',
       url: "/artists/6"
-    }).done(function(response){
+    }).done((response) => {
       console.log(response);
-    }).fail(function(){
+    }).fail(() => {
       console.log("Failed to update.");
     })
   })
@@ -411,15 +411,15 @@ Make an event listener that deletes a record in our database using AJAX in `app/
   <summary><strong>Solution...</strong></summary>
 
   ```js
-  $(".delete").on("click", function(){
+  $(".delete").on("click", () => {
     $.ajax({
       type: 'DELETE',
       dataType: 'json',
       url: "/artists/9"
-    }).done(function(response){
+    }).done((response) => {
       console.log("DELETED");
       console.log(response);
-    }).fail(function(){
+    }).fail(() => {
       console.log("Failed to delete.");
     })
   })
@@ -471,12 +471,12 @@ $.ajax({
   // (1) The URL endpoint for the JSON object.
   // (2) Type of HTTP request.
   // (3) Datatype. Usually JSON.
-}).done(function(response){
+}).done((response) => {
   console.log(response)
   // Here is where you place code for DOM manipulation or anything else you'd like to do with the response
-}).fail(function(){
+}).fail(() => {
   console.log("Ajax request fails!")
-}).always(function(){
+}).always(() => {
   console.log("This always happens regardless of successful ajax request or not.")
 })
 ```
@@ -488,9 +488,9 @@ $.ajax({
   type: 'GET',
   dataType: 'json',
   url: "/artists"
-}).done(function(response) {
+}).done((response) =>  {
   console.log(response);
-}).fail(function(response){
+}).fail((response) => {
   console.log("Ajax get request failed.");
 })
 ```
@@ -502,9 +502,9 @@ $.ajax({
   data: {artist: {photo_url: "www.google.com", name: "bob", nationality: "bob"}},
   dataType: 'json',
   url: "/artists"
-}).done(function(response) {
+}).done((response) =>  {
   console.log(response);
-}).fail(function(response){
+}).fail((response) => {
   console.log("Ajax get request failed");
 })
 ```
@@ -523,9 +523,9 @@ $.ajax({
   },
   dataType: 'json',
   url: "/artists/6"
-}).done(function(response){
+}).done((response) => {
   console.log(response);
-}).fail(function(){
+}).fail(() => {
   console.log("Failed to update.");
 })
 ```
@@ -537,10 +537,10 @@ $.ajax({
   type: 'DELETE',
   dataType: 'json',
   url: "/artists/9"
-}).done(function(response){
+}).done((response) => {
   console.log("DELETED");
   console.log(response);
-}).fail(function(){
+}).fail(() => {
   console.log("Failed to delete.");
 })
 ```
