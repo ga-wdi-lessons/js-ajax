@@ -184,12 +184,7 @@ We can drill through this response just like any other JS object...
 
 ## You Do: DOM Manipulation Using Response Data (10 minutes)
 
-Take our existing code for the the Weather Underground app. Instead of logging the temperature, the `.done()` promise should add a div to the page that contains the current wind speed in MPH.  
-
-#### Bonus
-
-1. Create an input text field for City and State in the HTML.  
-2. Have the endpoint url change dynamically based on user input to generate a div about current weather in that area.  
+Take our existing code for the the Weather Underground app. Instead of logging the temperature, the `.done()` promise should add a div to the page that contains the current wind gust in MPH.  
 
 ## Break (10 minutes)
 
