@@ -49,7 +49,7 @@ As we move into building single page applications, now is the perfect time to st
 
 > **TLDR** - an API is a service that provides raw data for public use.
 
-### API Data Formats (5 minutes / 0:15)
+### API Data Formats (5 minutes)
 
 ### What is Serialized Data?
 
