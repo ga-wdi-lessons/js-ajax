@@ -299,8 +299,8 @@ $(".post").on("click", () => {
     data: {
       artist: {
         name: "Limp Bizkit",
-        nationality: "USA"
-        photo_url: "http://nerdist.com/wp-content/uploads/2014/12/limp_bizkit-970x545.jpg",
+        nationality: "USA",
+        photo_url: "http://nerdist.com/wp-content/uploads/2014/12/limp_bizkit-970x545.jpg"
       }
     },
     dataType: 'json',
