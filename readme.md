@@ -293,22 +293,24 @@ Lets update our view to include some input fields and all of our existing artist
 Let's create an artist using AJAX. In `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".post").on("click", () => {
-  $.ajax({
-    type: 'POST',
-    data: {
-      artist: {
-        name: "Limp Bizkit",
-        nationality: "USA",
-        photo_url: "http://nerdist.com/wp-content/uploads/2014/12/limp_bizkit-970x545.jpg"
-      }
-    },
-    dataType: 'json',
-    url: "/artists"
-  }).done((response) =>  {
-    console.log(response);
-  }).fail((response) => {
-    console.log("AJAX POST failed");
+$(document).ready(()=>{
+  $(".post").on("click", () => {
+    $.ajax({
+      type: 'POST',
+      data: {
+        artist: {
+          name: "Limp Bizkit",
+          nationality: "USA",
+          photo_url: "http://nerdist.com/wp-content/uploads/2014/12/limp_bizkit-970x545.jpg"
+        }
+      },
+      dataType: 'json',
+      url: "/artists"
+    }).done((response) =>  {
+      console.log(response);
+    }).fail((response) => {
+      console.log("AJAX POST failed");
+    })
   })
 })
 ```
