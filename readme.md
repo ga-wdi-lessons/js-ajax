@@ -119,12 +119,12 @@ You should see a big JSON object. Lucky for us, we'll be able to navigate throug
 
 ## `$.ajax` (25 minutes)
 
-We can interact with APIs using a jQuery method called AJAX. AJAX ("Asynchronous Javascript and XML") is the method through which we can send HTTP requests from the client asynchronously without having to reload the page. The standard requests we will be making are GET POST PUT PATCH and DELETE.
+We can interact with APIs using a jQuery method called AJAX. AJAX ("Asynchronous Javascript and XML") is the method through which we can send HTTP requests from the client asynchronously without having to reload the page. The standard requests we will be making are GET, POST, PUT, PATCH and DELETE.
 
 Let's try that out ourselves. Let's start by cloning down [this repo](https://github.com/ga-wdi-exercises/weather_underground_ajax)...
 
 ```bash
-$ git clone git@github.com:ga-wdi-exercises/weather_underground_ajax.git
+$ git clone https://github.com/ga-wdi-exercises/weather_underground_ajax.git
 ```
 
 In `script.js`, we will use AJAX to send a `GET` request to the Weather Underground API...
