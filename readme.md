@@ -235,8 +235,10 @@ Create `app/views/artists/test_ajax.html.erb` and add the following...
 Let's add an event listener to the first link in `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".get").on("click", () => {
-  console.log("clicked!");
+$(document).ready(()=>{
+  $(".get").on("click", () => {
+    console.log("clicked!");
+  })
 })
 ```
 
@@ -245,17 +247,20 @@ $(".get").on("click", () => {
 Great, everything's working. Let's try doing a `GET` request to our API like we did with the Weather Underground. In `app/assets/javascripts/application.js`...
 
 ```javascript
-$(".get").on("click", () => {
-  $.ajax({
-    type: 'GET',
-    dataType: 'json',
-    url: "/artists"
-  }).done((response) =>  {
-    console.log(response);
-  }).fail((response) => {
-    console.log("Ajax get request failed.");
+$(document).ready(()=>{
+  $(".get").on("click", () => {
+    $.ajax({
+      type: 'GET',
+      dataType: 'json',
+      url: "/artists"
+    }).done((response) =>  {
+      console.log(response);
+    }).fail((response) => {
+      console.log("Ajax get request failed.");
+    })
   })
 })
+
 ```
 
 > If we access the response object, we can see all of the artists that were seeded in the database. Inside the done promise, we can interact with and display all the contents of the response.
