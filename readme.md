@@ -423,29 +423,23 @@ Make an event listener that deletes a record in our database using AJAX in `app/
   <summary><strong>Solution...</strong></summary>
 
   ```js
-  $(".delete").on("click", () => {
-    $.ajax({
-      type: 'DELETE',
-      dataType: 'json',
-      url: "/artists/9"
-    }).done((response) => {
-      console.log("DELETED");
-      console.log(response);
-    }).fail(() => {
-      console.log("Failed to delete.");
+  $(document).ready(()=>{
+    $(".delete").on("click", () => {
+      $.ajax({
+        type: 'DELETE',
+        dataType: 'json',
+        url: "/artists/4"
+      }).done((response) => {
+        console.log("DELETED");
+        console.log(response);
+      }).fail(() => {
+        console.log("Failed to delete.");
+      })
     })
   })
   ```
 
 </details>
-
-#### Bonus
-
-Each artist should have a button or link that, when clicked...
-
-* Allows for inline editing of the artist.
-* Submits an AJAX `PUT` request using the information in the input fields creating in the previous bonus prompt. Update the view with the new artist information.
-* Have a button or link that, when clicked, submits an AJAX `DELETE` request to delete that artist from the database. Remove the delete artist from the view.
 
 ## Closing / Questions
 
