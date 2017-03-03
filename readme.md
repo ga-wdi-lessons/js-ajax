@@ -10,9 +10,9 @@
 
 ## Framing
 
-In the first couple of weeks, we learned how to style a semantically structured HTML site with the ability to manipulate the DOM. In the past couple weeks or so, we've been learning a lot about server-side requests and responses. Today, we'll be tying these concepts together. Currently, we know how to create applications with full CRUD on models in our database, and that's great. When we do that CRUD, however, it requires a page reload of some kind. It would be really nice if had some functionality on the client side of our application but still communicate with the backend without a page refresh. If only we had a client side language that was non-blocking and asynchronous...
+In the first couple of weeks, we learned how to style a semantically structured HTML site with the ability to manipulate the DOM. In the past couple weeks or so, we've been learning a lot about server-side requests and responses. Today, we'll be tying these concepts together. Currently, we know how to create applications with full CRUD on models in our database, and that's great. When we do that CRUD, however, it requires a page reload of some kind. It would be really nice if we had some functionality on the client side of our application but could still communicate with the backend without a page refresh. If only we had a client side language that was non-blocking and asynchronous...
 
-## Turn & Talk (10 minutes / 0:10)
+## Turn & Talk (10 minutes)
 
 > 5 minutes T&T. 5 minutes review.
 
@@ -89,7 +89,7 @@ APIs are published everywhere. Chances are good that most major content sources 
 
 If you need an API but don't know which specific one to use, directories like the [Programmable Web API Directory](http://www.programmableweb.com/apis/directory) or [Public APIs Directory](http://www.publicapis.com/) can be helpful.
 
-## What Is An API Key? (5 minutes / 0:20)
+## What Is An API Key?
 
 While the majority of APIs are free to use, many of them require an API "key" that identifies the developer requesting access. This is done to regulate usage and prevent abuse. Some APIs also rate-limit developers, meaning they have caps on the free data allowed during a given time period.
 
@@ -102,7 +102,7 @@ Let's try making a GET request to the [Giphy API](https://api.giphy.com/)...
 
 **It is very important that you not push your API keys to a public Github repo.** This is especially true when working with [Amazon Web Services (AWS)](https://aws.amazon.com/). Here's an example of a [stolen key horror story](https://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight).
 
-## The Weather Underground API (add timing)
+## The Weather Underground API (10 minutes)
 
 For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). Follow the link and [sign up](https://www.wunderground.com/member/registration?mode=api_signup) for a key. You'll need to take the following steps...
 * Sign up for a Weather Underground account
@@ -117,7 +117,7 @@ Once you've done that, visit the below link but make sure to replace `your_key` 
 
 You should see a big JSON object. Lucky for us, we'll be able to navigate through it using Javascript.
 
-## `$.ajax` (25 minutes / 0:45)
+## `$.ajax` (25 minutes)
 
 We can interact with APIs using a jQuery method called AJAX. AJAX ("Asynchronous Javascript and XML") is the method through which we can send HTTP requests from the client asynchronously without having to reload the page. The standard requests we will be making are GET POST PUT PATCH and DELETE.
 
@@ -182,7 +182,7 @@ We can drill through this response just like any other JS object...
 
 > Note that we use traditional Javascript object notation to access the response.
 
-## You Do: DOM Manipulation Using Response Data (10 minutes / 0:55)
+## You Do: DOM Manipulation Using Response Data (10 minutes)
 
 Take our existing code for the the Weather Underground app. Instead of logging the temperature, the `.done()` promise should add a div to the page that contains the current wind speed in MPH.  
 
@@ -191,9 +191,9 @@ Take our existing code for the the Weather Underground app. Instead of logging t
 1. Create an input text field for City and State in the HTML.  
 2. Have the endpoint url change dynamically based on user input to generate a div about current weather in that area.  
 
-## Break (10 minutes / 1:05)
+## Break (10 minutes)
 
-## Intro: AJAX and CRUD (5 minutes / 1:10)
+## Intro: AJAX and CRUD (5 minutes)
 
 So we've used AJAX to do an asynchronous `GET` request to an API. More often than not, 3rd party APIs are read-only. They probably don't want just anyone to be able to update the weather however they want. That is not to say that kind of functionality doesn't exist, we just don't have access to it.
 
@@ -212,7 +212,7 @@ $ rails db:create db:migrate db:seed
 
 We can now use `$.ajax()` to make asynchronous HTTP requests to our Tunr API! Let's go ahead and create a new Artists controller action and corresponding view: `test_ajax`
 
-## Set up an AJAX Test View (10 minutes / 1:20)
+## Set up an AJAX Test View (10 minutes)
 
 Let's update our routes in `config/routes.rb` for a new route to test all of our AJAX calls in...
 
@@ -245,7 +245,7 @@ $(".get").on("click", () => {
 })
 ```
 
-## AJAX GET (5 minutes / 1:25)
+## AJAX GET (5 minutes)
 
 Great, everything's working. Let's try doing a `GET` request to our API like we did with the Weather Underground. In `app/assets/javascripts/application.js`...
 
@@ -265,7 +265,7 @@ $(".get").on("click", () => {
 
 > If we access the response object, we can see all of the artists that were seeded in the database. Inside the done promise, we can interact with and display all the contents of the response.
 
-## Setup for AJAX POST (10 minutes / 1:35)
+## Setup for AJAX POST (10 minutes)
 
 Lets update our view to include some input fields and all of our existing artists in `app/views/artists/test_ajax.html.erb`...
 
@@ -288,7 +288,7 @@ Lets update our view to include some input fields and all of our existing artist
 ```
 > Now we're listing all the artists in this view. We've also included an HTML form we'll use soon to generate new artists.
 
-## AJAX Post (10 minutes / 1:45)
+## AJAX Post (10 minutes)
 
 Let's create an artist using AJAX. In `app/assets/javascripts/application.js`...
 
@@ -317,9 +317,9 @@ Every time we click on this button another artist is generated. We can now creat
 
 * **How might we be able to dynamically acquire data on the client side instead of hardcoding values?**
 
-## Break (10 minutes / 1:55)
+## Break (10 minutes)
 
-## You Do: Dynamically Create Artists (15 minutes / 2:10)
+## You Do: Dynamically Create Artists (15 minutes)
 
 > 10 minutes exercise. 5 minutes review.
 
@@ -371,7 +371,7 @@ Once you create a new artist in the database, update the view so that it include
 
 > Hint: look at the response.
 
-## You Do: AJAX PUT (10 minutes / 2:20)
+## You Do: AJAX PUT (10 minutes)
 
 Update an existing artist by adding an AJAX call to the next event listener. Don't worry about doing this dynamically - just hardcode artist values into your Javascript for now.
 
@@ -405,7 +405,7 @@ Update an existing artist by adding an AJAX call to the next event listener. Don
 
 </details>
 
-## You Do: AJAX DELETE (10 minutes / 1:30)
+## You Do: AJAX DELETE (10 minutes)
 
 Make an event listener that deletes a record in our database using AJAX in `app/assets/javascripts/application.js`. Again, just hardcode the artist information into your Javascript.
 
