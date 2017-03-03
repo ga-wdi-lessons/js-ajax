@@ -5,14 +5,14 @@
 - Explain why synchronous program execution is not conducive to the front-end.
 - Use jQuery `$.ajax()` method to make asynchronous GET requests for data.
 - Use jQuery's 'promise-like' methods to handle AJAX responses asynchronously.
-- Render new HTML content using data loaded from an Ajax request.
+- Render new HTML content using data loaded from an AJAX request.
 - Perform POST, PUT, and DELETE requests to an API to modify data.
 
 ## Framing
 
-In the first couple of weeks we learned how to style a semantically structured HTML site with the ability to manipulate the DOM. In the past couple weeks or so, we've been learning a lot about server-side requests and responses. Today we'll be tying these concepts together. Currently we know how to create applications with full CRUD on models in our database, and that's great. When we do that CRUD, however, it requires a page reload of some kind. It would be really nice if had some functionality on the client side of our application but still communicate with the backend without a page refresh. If only we had a client side language that was non-blocking and asynchronous...
+In the first couple of weeks, we learned how to style a semantically structured HTML site with the ability to manipulate the DOM. In the past couple weeks or so, we've been learning a lot about server-side requests and responses. Today, we'll be tying these concepts together. Currently, we know how to create applications with full CRUD on models in our database, and that's great. When we do that CRUD, however, it requires a page reload of some kind. It would be really nice if we had some functionality on the client side of our application but could still communicate with the backend without a page refresh. If only we had a client side language that was non-blocking and asynchronous...
 
-## Turn & Talk (10 minutes / 0:10)
+## Turn & Talk (10 minutes)
 
 > 5 minutes T&T. 5 minutes review.
 
@@ -28,7 +28,7 @@ In the first couple of weeks we learned how to style a semantically structured H
 <details>
   <summary><strong>How would Google Maps work if everything happened synchronously?</strong></summary>
 
-  > The page would need to re-load whenever the map is updated. Consider how http requests work within your rails application.
+  > The page would need to reload whenever the map is updated. Consider how HTTP requests work within your Rails application.
 
 </details>
 
@@ -41,17 +41,23 @@ In the first couple of weeks we learned how to style a semantically structured H
 
 ### What Is An API?
 
-API stands for "Application Program Interface" and technically applies to all of software design. The DOM and jQuery are actually examples of APIs. Since the explosion of information technology, however, the term now commonly refers to web URLs that can be accessed for raw data.
+API stands for "Application Program Interface" and technically applies to all of software design. At the highest level, an API is a set of instructions for programmers to interact with an application. The DOM and Active Record are actually examples of APIs.
+
+Since the explosion of information technology, however, the term now commonly refers to web URLs that can be accessed for raw data.
 
 As we move into building single page applications, now is the perfect time to start understanding how to obtain data on the client side and then render it on the browser.
 
-> **tl;dr** - an API is a service that provides raw data for public use.
+> **TLDR** - an API is a service that provides raw data for public use.
 
 ### API Data Formats (5 minutes / 0:15)
 
+### What is Serialized Data?
+
+All data sent via HTTP are strings. Unfortunately, what we really want to pass between web applications is **structured data** (i.e., arrays and hashes). Thus, native data structures can be **serialized** into a string representation of the data. This string can be transmitted and then parsed back into data by another web agent.  
+
 #### JSON
 
-**JSON** stands for "JavaScript Object Notation" and has become a universal standard for serializing native data structures for transmission. It is light-weight, easy to read and quick to parse.
+**JSON** stands for "JavaScript Object Notation" and has become a universal standard for serializing native data structures for transmission. It is light-weight, easy-to-read and quick to parse.
 
 ```json
 {
@@ -61,7 +67,6 @@ As we move into building single page applications, now is the perfect time to st
   ]
 }
 ```
-> JSON is a serialized format, meaning it is made up of strings. While it may look like an object, it needs to be parsed so we can interact with it as a true Javascript object.
 
 #### XML
 
@@ -84,7 +89,7 @@ APIs are published everywhere. Chances are good that most major content sources 
 
 If you need an API but don't know which specific one to use, directories like the [Programmable Web API Directory](http://www.programmableweb.com/apis/directory) or [Public APIs Directory](http://www.publicapis.com/) can be helpful.
 
-## What Is An API Key? (5 minutes / 0:20)
+## What Is An API Key?
 
 While the majority of APIs are free to use, many of them require an API "key" that identifies the developer requesting access. This is done to regulate usage and prevent abuse. Some APIs also rate-limit developers, meaning they have caps on the free data allowed during a given time period.
 
@@ -97,7 +102,7 @@ Let's try making a GET request to the [Giphy API](https://api.giphy.com/)...
 
 **It is very important that you not push your API keys to a public Github repo.** This is especially true when working with [Amazon Web Services (AWS)](https://aws.amazon.com/). Here's an example of a [stolen key horror story](https://wptavern.com/ryan-hellyers-aws-nightmare-leaked-access-keys-result-in-a-6000-bill-overnight).
 
-## The Weather Underground API
+## The Weather Underground API (10 minutes)
 
 For the first part of this lesson we'll be using the [Weather Underground API](http://www.wunderground.com/weather/api/d/docs). Follow the link and [sign up](https://www.wunderground.com/member/registration?mode=api_signup) for a key. You'll need to take the following steps...
 * Sign up for a Weather Underground account
@@ -112,9 +117,9 @@ Once you've done that, visit the below link but make sure to replace `your_key` 
 
 You should see a big JSON object. Lucky for us, we'll be able to navigate through it using Javascript.
 
-## `$.ajax` (25 minutes / 0:45)
+## `$.ajax` (25 minutes)
 
-We can interact with APIs using a jQuery method called AJAX. With the help of AJAX ("Asynchronous Javascript and XML") we can send HTTP requests from the client asynchronously without having to reload the page.
+We can interact with APIs using a jQuery method called AJAX. AJAX ("Asynchronous Javascript and XML") is the method through which we can send HTTP requests from the client asynchronously without having to reload the page. The standard requests we will be making are GET POST PUT PATCH and DELETE.
 
 Let's try that out ourselves. Let's start by cloning down [this repo](https://github.com/ga-wdi-exercises/weather_underground_ajax)...
 
@@ -148,7 +153,10 @@ $("button").on("click", () => {
 
 > AJAX is given to us through the jQuery library. Like all jQuery methods, [it is just running vanilla Javascript under the hood](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest).
 
-You'll notice there are 3 functions chained onto the AJAX call. These are known as **promises**. Promises are callbacks that may or may not happen. A promise represents the future result of an asynchronous operation.
+
+### Promises
+
+You'll notice there are 3 functions chained onto the AJAX call. These are known as **promise methods**. Promises are callbacks that may or may not happen. A promise represents the future result of an asynchronous operation. It's how we do something with the return value of our `$.ajax` request.
 
 * `.done()` - this code is run if the AJAX call is successful
 * `.fail()` - this code is run if the AJAX call is not successful
@@ -174,20 +182,20 @@ We can drill through this response just like any other JS object...
 
 > Note that we use traditional Javascript object notation to access the response.
 
-## You Do: DOM Manipulation Using Response Data (10 minutes / 0:55)
+## You Do: DOM Manipulation Using Response Data (10 minutes)
 
-Take our existing code for the the weather underground app. Instead of logging the temperature, the `.done()` promise should add a div to the page that contains the current wind speed in MPH.  
+Take our existing code for the the Weather Underground app. Instead of logging the temperature, the `.done()` promise should add a div to the page that contains the current wind speed in MPH.  
 
 #### Bonus
 
 1. Create an input text field for City and State in the HTML.  
 2. Have the endpoint url change dynamically based on user input to generate a div about current weather in that area.  
 
-## Break (10 minutes / 1:05)
+## Break (10 minutes)
 
-## Intro: AJAX and CRUD (5 minutes / 1:10)
+## Intro: AJAX and CRUD (5 minutes)
 
-So we've used AJAX to do an asynchronous `GET` request to an API. More often than not, 3rd party API's are read-only. They probably don't want just anyone to be able to update the weather however they want. That is not to say that kind of functionality doesn't exist, we just don't have access to it.
+So we've used AJAX to do an asynchronous `GET` request to an API. More often than not, 3rd party APIs are read-only. They probably don't want just anyone to be able to update the weather however they want. That is not to say that kind of functionality doesn't exist, we just don't have access to it.
 
 It just so happens we've built a Tunr Rails API where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-wdi-exercises/tunr_rails_ajax)...
 
@@ -204,7 +212,7 @@ $ rails db:create db:migrate db:seed
 
 We can now use `$.ajax()` to make asynchronous HTTP requests to our Tunr API! Let's go ahead and create a new Artists controller action and corresponding view: `test_ajax`
 
-## Set up an AJAX Test View (10 minutes / 1:20)
+## Set up an AJAX Test View (10 minutes)
 
 Let's update our routes in `config/routes.rb` for a new route to test all of our AJAX calls in...
 
@@ -229,8 +237,6 @@ Create `app/views/artists/test_ajax.html.erb` and add the following...
 <div class="delete">AJAX DELETE!</div>
 ```
 
-<!-- AM: Add some styling so that ^ these ^ look like buttons... -->
-
 Let's add an event listener to the first link in `app/assets/javascripts/application.js`...
 
 ```javascript
@@ -239,7 +245,7 @@ $(".get").on("click", () => {
 })
 ```
 
-## AJAX GET (5 minutes / 1:25)
+## AJAX GET (5 minutes)
 
 Great, everything's working. Let's try doing a `GET` request to our API like we did with the Weather Underground. In `app/assets/javascripts/application.js`...
 
@@ -259,7 +265,7 @@ $(".get").on("click", () => {
 
 > If we access the response object, we can see all of the artists that were seeded in the database. Inside the done promise, we can interact with and display all the contents of the response.
 
-## Setup for AJAX POST (10 minutes / 1:35)
+## Setup for AJAX POST (10 minutes)
 
 Lets update our view to include some input fields and all of our existing artists in `app/views/artists/test_ajax.html.erb`...
 
@@ -282,7 +288,7 @@ Lets update our view to include some input fields and all of our existing artist
 ```
 > Now we're listing all the artists in this view. We've also included an HTML form we'll use soon to generate new artists.
 
-## AJAX Post (10 minutes / 1:45)
+## AJAX Post (10 minutes)
 
 Let's create an artist using AJAX. In `app/assets/javascripts/application.js`...
 
@@ -311,9 +317,9 @@ Every time we click on this button another artist is generated. We can now creat
 
 * **How might we be able to dynamically acquire data on the client side instead of hardcoding values?**
 
-## Break (10 minutes / 1:55)
+## Break (10 minutes)
 
-## You Do: Dynamically Create Artists (15 minutes / 2:10)
+## You Do: Dynamically Create Artists (15 minutes)
 
 > 10 minutes exercise. 5 minutes review.
 
@@ -365,7 +371,7 @@ Once you create a new artist in the database, update the view so that it include
 
 > Hint: look at the response.
 
-## You Do: AJAX PUT (10 minutes / 2:20)
+## You Do: AJAX PUT (10 minutes)
 
 Update an existing artist by adding an AJAX call to the next event listener. Don't worry about doing this dynamically - just hardcode artist values into your Javascript for now.
 
@@ -399,7 +405,7 @@ Update an existing artist by adding an AJAX call to the next event listener. Don
 
 </details>
 
-## You Do: AJAX DELETE (10 minutes / 1:30)
+## You Do: AJAX DELETE (10 minutes)
 
 Make an event listener that deletes a record in our database using AJAX in `app/assets/javascripts/application.js`. Again, just hardcode the artist information into your Javascript.
 
