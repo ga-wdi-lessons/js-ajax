@@ -348,38 +348,34 @@ Use the form to dynamically generate artists from the client side.
   ```
 
   ```js
-  $(".post").on("click", () => {
+  $(document).ready(()=>{
+    $(".post").on("click", () => {
 
-    let name = $(".name").val()
-    let photo_url = $(".photo_url").val()
-    let nationality = $(".nationality").val()
+      let name = $(".name").val()
+      let photo_url = $(".photo_url").val()
+      let nationality = $(".nationality").val()
 
-    $.ajax({
-      type: 'POST',
-      data: {
-        artist: {
-          name: name,
-          nationality: nationality,
-          photo_url: photo_url
-        }
-      },
-      dataType: 'json',
-      url: "/artists"
-    }).done((response) => {
-      console.log(response);
-    }).fail(() => {
-      console.log("Failed to create.");
+      $.ajax({
+        type: 'POST',
+        data: {
+          artist: {
+            name: name,
+            nationality: nationality,
+            photo_url: photo_url
+          }
+        },
+        dataType: 'json',
+        url: "/artists"
+      }).done((response) => {
+        console.log(response);
+      }).fail(() => {
+        console.log("Failed to create.");
+      })
     })
   })
   ```
 
 </details>
-
-#### Bonus
-
-Once you create a new artist in the database, update the view so that it includes the new artist.
-
-> Hint: look at the response.
 
 ## You Do: AJAX PUT (10 minutes)
 
