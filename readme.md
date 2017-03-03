@@ -195,7 +195,7 @@ So we've used AJAX to do an asynchronous `GET` request to an API. More often tha
 It just so happens we've built a Tunr Rails API where we can do full CRUD with AJAX. Go ahead and fork and clone [this repo](https://github.com/ga-wdi-exercises/tunr_rails_ajax)...
 
 ```bash
-$ git clone git@github.com:ga-wdi-exercises/tunr_rails_ajax.git
+$ git clone https://github.com/ga-wdi-exercises/tunr_rails_ajax.git
 ```
 
 Once you've cloned the repo, `cd` into it and run the usual commands...
