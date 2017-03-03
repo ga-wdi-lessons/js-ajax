@@ -313,6 +313,14 @@ $(".post").on("click", () => {
 })
 ```
 
+In `app/controllers/artists_controller.rb`...
+
+```ruby
+def test_ajax
+  @artists = Artist.all
+end
+```
+
 Every time we click on this button another artist is generated. We can now create things in our database from the client-side. But there's a problem here: we've hardcoded the attributes.
 
 * **How might we be able to dynamically acquire data on the client side instead of hardcoding values?**
