@@ -443,7 +443,7 @@ Make an event listener that deletes a record in our database using AJAX in `app/
 
 ## Closing / Questions
 
-Angular developers often need to perform CRUD functionality to/from an API. This is the stuff that's happening under the hood when we're leveraging Angular Resources, which you will learn about tomorrow. You could imagine that writing all the setup for CRUD functionality through javascript could get a bit unwieldy. That's why front end frameworks like Angular exist, they solve that problem.
+Angular developers often need to perform CRUD functionality to/from an API. This is the stuff that's happening under the hood when we're leveraging Angular Resources, which you will learn about later. You could imagine that writing all the setup for CRUD functionality through javascript could get a bit unwieldy. That's why front end frameworks like Angular exist, they solve that problem.
 
 ## Sample Quiz Questions
 
