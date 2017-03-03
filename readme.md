@@ -387,22 +387,24 @@ Update an existing artist by adding an AJAX call to the next event listener. Don
   <summary><strong>Solution...</strong></summary>
 
   ```javascript
-  $(".put").on("click", () => {
-    $.ajax({
-      type: 'PUT',
-      data: {
-        artist: {
-          name: "Robert Goulet",
-          nationality: "American",
-          photo_url: "http://media.giphy.com/media/u5yMOKjUpASwU/giphy.gif"
-        }
-      },
-      dataType: 'json',
-      url: "/artists/6"
-    }).done((response) => {
-      console.log(response);
-    }).fail(() => {
-      console.log("Failed to update.");
+  $(document).ready(()=>{
+    $(".put").on("click", () => {
+      $.ajax({
+        type: 'PUT',
+        data: {
+          artist: {
+            name: "Robert Goulet",
+            nationality: "British",
+            photo_url: "http://media.giphy.com/media/u5yMOKjUpASwU/giphy.gif"
+          }
+        },
+        dataType: 'json',
+        url: "/artists/6"
+      }).done((response) => {
+        console.log(response);
+      }).fail(() => {
+        console.log("Failed to update.");
+      })
     })
   })
   ```
