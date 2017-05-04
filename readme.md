@@ -53,7 +53,7 @@ As we move into building single page applications, now is the perfect time to st
 
 ### What is Serialized Data?
 
-All data sent via HTTP are strings. Unfortunately, what we really want to pass between web applications is **structured data** (i.e., arrays and hashes). Thus, native data structures can be **serialized** into a string representation of the data. This string can be transmitted and then parsed back into data by another web agent.  
+All data sent via HTTP are strings. Unfortunately, what we really want to pass between web applications is **structured data** (i.e., arrays and hashes). Thus, native data structures can be **serialized** (converted from our JS objects and other variables) into a string representation of the data. This string can be transmitted and then parsed back into data (de-serialized) by another web agent.  
 
 #### JSON
 
@@ -116,6 +116,13 @@ Once you've done that, visit the below link but make sure to replace `your_key` 
 `http://api.wunderground.com/api/your_key/conditions/q/CA/San_Francisco.json`
 
 You should see a big JSON object. Lucky for us, we'll be able to navigate through it using Javascript.
+
+<details>
+  <summary><strong>Now that you have your API key, where should you publish the API key? With whom do we share it?</strong></summary>
+
+  > No where! Keep it out of your git repo! Share it with no one! Treat it like a password and keep it secret.
+
+</details>
 
 ## `$.ajax` (25 minutes)
 
@@ -202,7 +209,7 @@ Once you've cloned the repo, `cd` into it and run the usual commands...
 
 ```bash
 $ bundle install
-$ rails db:create db:migrate db:seed
+$ rails db:drop db:create db:migrate db:seed
 ```
 
 We can now use `$.ajax()` to make asynchronous HTTP requests to our Tunr API! Let's go ahead and create a new Artists controller action and corresponding view: `test_ajax`
@@ -286,7 +293,7 @@ Lets update our view to include some input fields and all of our existing artist
   <% end %>
 </ul>
 ```
-> Now we're listing all the artists in this view. We've also included an HTML form we'll use soon to generate new artists.
+> Now we're listing all the artists in this view. We'll also be including an HTML form soon to generate new artists.
 
 ## AJAX Post (10 minutes)
 
@@ -333,7 +340,8 @@ Every time we click on this button another artist is generated. We can now creat
 
 > 10 minutes exercise. 5 minutes review.
 
-Use the form to dynamically generate artists from the client side.
+Add a form to dynamically generate artists from the client side.
+> Hint: use jQuery selectors to grab the data.
 
 <details>
   <summary><strong>Solution...</strong></summary>
